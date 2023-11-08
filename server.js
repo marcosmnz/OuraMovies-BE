@@ -14,7 +14,7 @@ const port = process.env.PORT || 3000;
 main().catch((err) => console.log(err));
 
 async function main() {
-  await mongoose.connect(process.env.DB_CONNECTION_STRING);
+  await mongoose.connect(process.env.MONGODB_URI);
 
   console.log("Conectado a la base de datos");
 }
@@ -26,7 +26,6 @@ app.use("/api/signout", require("./routes/logout"));
 // Ruta para renovar el token de acceso utilizando el token de actualización
 app.use("/api/refresh-token", require("./routes/refreshToken"));
 
-app.use("/api/posts", authenticateToken, require("./routes/posts"));
 // Ruta protegida que requiere autenticación
 /* app.get("/api/posts", authenticateToken, (req, res) => {
   res.json(posts);

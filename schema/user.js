@@ -6,7 +6,7 @@ const Token = require("../schema/token");
 
 const UserSchema = new Mongoose.Schema({
   id: { type: Object },
-  username: { type: String, required: true, unique: true },
+  email: { type: String, required: true, unique: true},
   password: { type: String, required: true },
   name: { type: String, required: true },
 });
@@ -28,8 +28,8 @@ UserSchema.pre("save", function (next) {
   }
 });
 
-UserSchema.methods.usernameExists = async function (username) {
-  const result = await Mongoose.model("User").find({ username: username });
+UserSchema.methods.emailExists = async function (email) {
+  const result = await Mongoose.model("User").find({ email: email });
   return result.length > 0;
 };
 
